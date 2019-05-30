@@ -8,3 +8,7 @@ Cara penggunaan :
 5. jalankan di http://127.1.1.1/sisurat/
 
 
+untuk mencoba login gunakan akun dibawah :
+username : furqon
+password : qwerty
+
