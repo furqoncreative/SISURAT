@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2019 at 01:42 AM
+-- Generation Time: May 30, 2019 at 12:38 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -32,18 +32,37 @@ CREATE TABLE `admin` (
   `id_user` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `nama_user` varchar(100) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `update_at` datetime NOT NULL
+  `nama_user` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id_user`, `username`, `password`, `nama_user`, `created_at`, `update_at`) VALUES
-(1, 'furqon', '827ccb0eea8a706c4c34a16891f84e7b', 'Deden Muhamad Furqon', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'miftah', '0860dfc81a442d5c56230c8f5cebf1d5', 'Miftahul Jannah', '2019-05-29 00:00:00', '2019-05-29 00:00:00');
+INSERT INTO `admin` (`id_user`, `username`, `password`, `nama_user`) VALUES
+(1, 'furqon', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Deden Muhamad Furqon'),
+(2, 'miftah', '0860dfc81a442d5c56230c8f5cebf1d5', 'Miftahul Jannah');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `cetak_jadwal`
+-- (See below for the actual view)
+--
+CREATE TABLE `cetak_jadwal` (
+`kode_jurusan` varchar(100)
+,`kode_dosen` varchar(100)
+,`nama_dosen` varchar(100)
+,`nama_mk` varchar(100)
+,`jumlah_sks` int(11)
+,`semester` int(11)
+,`nama_jurusan` varchar(100)
+,`kelas` varchar(100)
+,`hari` varchar(100)
+,`jam_mulai` time
+,`jam_selesai` time
+,`nama_ruangan` varchar(100)
+);
 
 -- --------------------------------------------------------
 
@@ -63,7 +82,9 @@ CREATE TABLE `dosen` (
 --
 
 INSERT INTO `dosen` (`kode_dosen`, `nip`, `nidn`, `nama`) VALUES
-('23423', 23452, 635635, 'Nurlukman');
+('12081', 28409812, 149821, 'Wildan Budiawan Z	S.T., M.Kom.'),
+('131453', 15245112, 12335214, 'Mohamad Irfan, ST., M.Kom.'),
+('23423', 23452, 635635, 'Nur Lukman, ST. M.Kom');
 
 -- --------------------------------------------------------
 
@@ -79,15 +100,28 @@ CREATE TABLE `jadwal` (
   `hari` varchar(100) NOT NULL,
   `jam_mulai` time NOT NULL,
   `jam_selesai` time NOT NULL,
-  `periode` varchar(100) NOT NULL
+  `periode` varchar(100) NOT NULL,
+  `kelas` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jadwal`
 --
 
-INSERT INTO `jadwal` (`id_jadwal`, `kode_dosen`, `kode_mk`, `kode_ruangan`, `hari`, `jam_mulai`, `jam_selesai`, `periode`) VALUES
-(7, '23423', '231', '401', 'Selasa', '10:20:00', '12:00:00', '2019');
+INSERT INTO `jadwal` (`id_jadwal`, `kode_dosen`, `kode_mk`, `kode_ruangan`, `hari`, `jam_mulai`, `jam_selesai`, `periode`, `kelas`) VALUES
+(7, '23423', '231', '401', 'Selasa', '10:20:00', '12:00:00', '2019', ''),
+(9, '23423', '231', '401', 'Kamis', '08:40:00', '10:20:00', '2018/2019', 'A'),
+(10, '23423', '213', '301', 'Jumat', '11:11:00', '11:12:00', '2018/2019', 'C'),
+(11, '23423', '213', '301', 'Selasa', '16:00:00', '17:00:00', '2017/2018', 'B'),
+(12, '12081', 'IF15401', '405', 'Senin', '08:40:00', '10:20:00', '2018/2019', 'A'),
+(13, '12081', 'IF15401', '405', 'Senin', '10:20:00', '12:00:00', '2018/2019', 'B'),
+(14, '12081', 'IF15401', '404', 'Selasa', '07:00:00', '08:40:00', '2018/2019', 'C'),
+(15, '23423', 'IF15402L', '405', 'Selasa', '08:40:00', '10:20:00', '2018/2019', 'A'),
+(16, '23423', 'IF15402L', '405', 'Selasa', '10:20:00', '12:00:00', '2018/2019', 'B'),
+(17, '23423', 'IF15402L', '405', 'Kamis', '08:40:00', '10:20:00', '2018/2019', 'C'),
+(18, '23423', 'IF15402L', '405', 'Kamis', '10:20:00', '12:00:00', '2018/2019', 'D'),
+(19, '131453', 'IF15201', '404', 'Senin', '02:00:00', '08:40:00', '2017/2018', 'A'),
+(20, '131453', 'IF15201', '403', 'Senin', '08:40:00', '10:20:00', '2018/2019', 'B');
 
 -- --------------------------------------------------------
 
@@ -120,7 +154,7 @@ INSERT INTO `jurusan` (`kode_jurusan`, `nama`) VALUES
 --
 
 CREATE TABLE `matakuliah` (
-  `kode_mk` int(11) NOT NULL,
+  `kode_mk` varchar(100) NOT NULL,
   `kode_jurusan` varchar(100) NOT NULL,
   `nama_mk` varchar(100) NOT NULL,
   `jumlah_sks` int(11) NOT NULL,
@@ -133,9 +167,10 @@ CREATE TABLE `matakuliah` (
 --
 
 INSERT INTO `matakuliah` (`kode_mk`, `kode_jurusan`, `nama_mk`, `jumlah_sks`, `kurikulum`, `semester`) VALUES
-(213, '43291', 'Basis Data', 2, '2017', 4),
-(231, '43291', 'Praktikum Rekayasa Perangkat  Lunak', 1, '2017', 4),
-(21321, ' selected', 'Basisdata', 2, '2018', 4);
+('21321', ' selected', 'Basisdata', 2, '2018', 4),
+('IF15201', '43291', 'Algoritma dan Pemrograman', 2, '2017', 2),
+('IF15401', '43291', 'Basis Data', 2, '2017', 4),
+('IF15402L', '43291', 'Praktikum Rekayasa Perangkat Lunak', 1, '2017', 4);
 
 -- --------------------------------------------------------
 
@@ -145,7 +180,7 @@ INSERT INTO `matakuliah` (`kode_mk`, `kode_jurusan`, `nama_mk`, `jumlah_sks`, `k
 
 CREATE TABLE `pejabat` (
   `kode_pejabat` varchar(100) NOT NULL,
-  `nip` int(11) NOT NULL,
+  `nip` bigint(25) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `jabatan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -155,7 +190,7 @@ CREATE TABLE `pejabat` (
 --
 
 INSERT INTO `pejabat` (`kode_pejabat`, `nip`, `nama`, `jabatan`) VALUES
-('11', 322, 'ssas', 'dsfsd');
+('0001', 1962209181988031001, 'Dr. Cecep Hidayat, Ir. Mp', 'Wakil Dekan Bidang Akademik');
 
 -- --------------------------------------------------------
 
@@ -173,9 +208,10 @@ CREATE TABLE `ruangan` (
 --
 
 INSERT INTO `ruangan` (`kode_ruangan`, `nama`) VALUES
-('222', '342'),
-('301', 'R 3.02'),
-('401', 'R. 4.02');
+('401', 'R. 4.02'),
+('403', 'R. 4.03'),
+('404', 'R. 4.04'),
+('405', 'R. 4.05');
 
 -- --------------------------------------------------------
 
@@ -201,7 +237,9 @@ CREATE TABLE `surat` (
 --
 
 INSERT INTO `surat` (`id_surat`, `no_surat`, `tanggal_surat`, `kode_dosen`, `periode`, `semester`, `tanggal_sap`, `kode_pejabat`, `tanggal_mulai`, `tanggal_selesai`) VALUES
-(1, 'B.0051/Un.05/III.7/PP.00.9/05/2019', '2019-05-29', '23423', '2018', 'ganjil', '2019-05-30', '11', '2019-05-31', '2019-05-30');
+(3, 'B.0051/Un.05/III.7/PP.00.9/05/2019', '2019-05-30', '12081', '2018/2019', 'genap', '2019-05-30', '0001', '2019-05-30', '2019-05-31'),
+(4, 'B.0051/Un.05/III.7/PP.00.9/05/2019', '2019-05-30', '23423', '2018/2019', 'ganjil', '2019-05-15', '0001', '2019-05-15', '2019-05-30'),
+(5, 'B.0051/Un.05/III.7/PP.00.9/05/2019', '2019-05-30', '131453', '2018/2019', 'genap', '2019-05-14', '0001', '2019-05-15', '2019-05-23');
 
 -- --------------------------------------------------------
 
@@ -383,6 +421,15 @@ INSERT INTO `tbl_session` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('cd6u0sqslbce3rf8b9al8psolspgthcb', '::1', 1558913892, 0x5f5f63695f6c6173745f726567656e65726174657c693a313535383931333838383b),
 ('p4h191m7kav1tqugqvemi39ju0hknudo', '127.0.0.1', 1558941400, 0x5f5f63695f6c6173745f726567656e65726174657c693a313535383934313430303b);
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `cetak_jadwal`
+--
+DROP TABLE IF EXISTS `cetak_jadwal`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cetak_jadwal`  AS  select `jurusan`.`kode_jurusan` AS `kode_jurusan`,`dosen`.`kode_dosen` AS `kode_dosen`,`dosen`.`nama` AS `nama_dosen`,`mk`.`nama_mk` AS `nama_mk`,`mk`.`jumlah_sks` AS `jumlah_sks`,`mk`.`semester` AS `semester`,`jurusan`.`nama` AS `nama_jurusan`,`jadwal`.`kelas` AS `kelas`,`jadwal`.`hari` AS `hari`,`jadwal`.`jam_mulai` AS `jam_mulai`,`jadwal`.`jam_selesai` AS `jam_selesai`,`ruangan`.`nama` AS `nama_ruangan` from ((((`jadwal` join `dosen` on((`dosen`.`kode_dosen` = `jadwal`.`kode_dosen`))) join `matakuliah` `mk` on((`mk`.`kode_mk` = `jadwal`.`kode_mk`))) join `ruangan` on((`ruangan`.`kode_ruangan` = `jadwal`.`kode_ruangan`))) join `jurusan` on((`jurusan`.`kode_jurusan` = `mk`.`kode_jurusan`))) ;
+
 --
 -- Indexes for dumped tables
 --
@@ -449,13 +496,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `id_surat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_surat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
