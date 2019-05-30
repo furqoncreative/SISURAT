@@ -69,8 +69,8 @@
 											 class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
 											<a onclick="deleteConfirm('<?php echo site_url('admin/surat/delete/'.$surat->id_surat) ?>')"
 											 href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
-											<a onclick="deleteConfirm('<?php echo site_url('admin/surat/cetak/'.$surat->id_surat) ?>')"
-												href="#!" class="btn btn-small text-warning"><i class="fas fa-print"></i> Cetak</a>
+											<a href="<?php echo site_url('admin/surat/print/'.$surat->kode_dosen) ?>"
+											 class="btn btn-small text-warning" target="_blank"><i class="fas fa-print"></i> Cetak</a>
 											</td>
 									</tr>
 									<?php endforeach; ?>

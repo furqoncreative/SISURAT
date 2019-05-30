@@ -30,9 +30,11 @@
 				<div class="card-body-icon">
 					<i class="fas fa-fw fa-envelope-open"></i>
 				</div>
-				<div class="mr-5">26 Surat</div>
+				<div class="mr-5">
+					<?php $query = $this->db->query('SELECT * FROM surat');
+					echo $query->num_rows(); ?> Surat</div>
 				</div>
-				<a class="card-footer text-white clearfix small z-1" href="#">
+				<a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('admin/surat') ?>">
 				<span class="float-left">Lihat Detail</span>
 				<span class="float-right">
 					<i class="fas fa-angle-right"></i>
@@ -46,9 +48,10 @@
 				<div class="card-body-icon">
 					<i class="fas fa-fw fa-users"></i>
 				</div>
-				<div class="mr-5">11 Dosen!</div>
+				<div class="mr-5"><?php $query = $this->db->query('SELECT * FROM dosen');
+					echo $query->num_rows(); ?> Dosen!</div>
 				</div>
-				<a class="card-footer text-white clearfix small z-1" href="#">
+				<a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('admin/dosen') ?>">
 				<span class="float-left">Lihat Detail</span>
 				<span class="float-right">
 					<i class="fas fa-angle-right"></i>
@@ -62,9 +65,10 @@
 				<div class="card-body-icon">
 					<i class="fas fa-fw fa-book-open"></i>
 				</div>
-				<div class="mr-5">123 Mata Kuliah!</div>
+				<div class="mr-5"><?php $query = $this->db->query('SELECT * FROM matakuliah');
+					echo $query->num_rows(); ?> Mata Kuliah!</div>
 				</div>
-				<a class="card-footer text-white clearfix small z-1" href="#">
+				<a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('admin/matakuliah') ?>">
 				<span class="float-left">Lihat Detail</span>
 				<span class="float-right">
 					<i class="fas fa-angle-right"></i>
@@ -78,9 +82,10 @@
 				<div class="card-body-icon">
 					<i class="fas fa-fw fa-boxes"></i>
 				</div>
-				<div class="mr-5">13 Jurusan!</div>
+				<div class="mr-5"><?php $query = $this->db->query('SELECT * FROM jurusan');
+					echo $query->num_rows(); ?> Jurusan!</div>
 				</div>
-				<a class="card-footer text-white clearfix small z-1" href="#">
+				<a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('admin/jurusan') ?>">
 				<span class="float-left">Lihat Detail</span>
 				<span class="float-right">
 					<i class="fas fa-angle-right"></i>
@@ -114,28 +119,29 @@
 				<div class="card m-3 col">
 					<div class="card-header">
 					<i class="fas fa-print"></i>
-					Cetak Surat Cepat</div>
+					Cetak Surat Cepat </div>
 					<div class="card-body">
 
-						<form action="<?php base_url('') ?>" method="post" enctype="multipart/form-data" >
+						<form action="<?php base_url(" admin/overview/print") ?>" method="post" enctype="multipart/form-data" >
 							<div class="form-group">
-								<form action="<?php base_url('admin/jadwal/add') ?>" method="post" enctype="multipart/form-data" >
-
-								<select class="form-control  <?php echo form_error('kode_dosen') ? 'is-invalid':'' ?>"  name="kode_dosen" >
+								
+							<select class="form-control  <?php echo form_error('kode_dosen') ? 'is-invalid':'' ?>"  name="kode_dosen" >
 								<option>Pilih Dosen</option>	
 								<?php foreach ($dosen as $dosen): ?>	
-								<option value="<?php echo $dosen->kode_dosen;?>"><?php echo $dosen->nama;?></option>
+								<option value="<?php echo $dosen->kode_dosen;?>"><?php echo $dosen->nama;?> </option>
+								
 								<?php endforeach; ?> 
 							
-								</select>
-								<div class="invalid-feedback">
-									<?php echo form_error('kode_dosen') ?>
-								</div>
-							</form>
+							</select>
+							<div class="invalid-feedback">
+								<?php echo form_error('kode_dosen') ?>
+							</div>
+						
 							</div>
 							<div class="text-center">
-								<input class="btn btn-success btn-md" type="submit" name="btn" value="Cetak" />
+								<input class="btn btn-success" type="submit" name="btn" value="Cetak" />			
 							</div>
+							
 						</form>
 			
 					</div>

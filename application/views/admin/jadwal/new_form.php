@@ -112,9 +112,18 @@
 							<div class="form-group">
 								<label for="name">Periode*</label>
 								<input class="form-control <?php echo form_error('periode') ? 'is-invalid':'' ?>"
-								 type="text" name="periode" placeholder="Masuka periode" />
+								 type="text" name="periode" placeholder="Masukan periode" />
 								<div class="invalid-feedback">
 									<?php echo form_error('periode') ?>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="name">Kelas*</label>
+								<input class="form-control <?php echo form_error('kelas') ? 'is-invalid':'' ?>"
+								 type="text" name="kelas" placeholder="Masukan kelas" />
+								<div class="invalid-feedback">
+									<?php echo form_error('kelas') ?>
 								</div>
 							</div>
 							

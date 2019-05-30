@@ -3,6 +3,7 @@
 class Surat_model extends CI_Model
 {
     private $_table = "surat";
+    private $_view = "cetak_jadwal";
 
     public $id_surat;
     public $tanggal_surat;
@@ -58,6 +59,15 @@ class Surat_model extends CI_Model
         ];
     }
 
+    public function jumlahSurat()
+    {
+            $this->db->select('count(id_surat) as id_surat');
+            $this->db->from('surat');
+               
+            $query = $this->db->get();
+            return $query->result();
+    }
+
     public function getAll()
     {
             $this->db->select('surat.*,dosen.nama as nama_dosen');
@@ -67,10 +77,33 @@ class Surat_model extends CI_Model
             $query = $this->db->get();
             return $query->result();
     }
-    
-    public function getById($id)
+
+    public function cetakSurat($kode_dosen)
     {
-        return $this->db->get_where($this->_table, ["id_surat" => $id])->row();
+        $this->db->select('surat.*,dosen.nama as nama_dosen, pejabat.nip as nip_pejabat, pejabat.nama as nama_pejabat, pejabat.jabatan ');
+            $this->db->from('surat');
+            $this->db->join('dosen', 'dosen.kode_dosen = surat.kode_dosen');
+            $this->db->join('pejabat', 'pejabat.kode_pejabat = surat.kode_pejabat');
+            $this->db->where('surat.kode_dosen='.$kode_dosen);
+        
+            return $query = $this->db->get()->row();
+    }
+
+
+
+    public  function cetakJadwal($kode_dosen)
+    {
+             $this->db->select('cetak_jadwal.*');
+            $this->db->from('cetak_jadwal');
+            $this->db->where('kode_dosen='. $kode_dosen);
+        
+            $query = $this->db->get();
+            return $query->result();
+    }
+    
+    public function getById($id_surat)
+    {
+        return $this->db->get_where($this->_table, ["id_surat" => $id_surat])->row();
     }
 
     public function save()
@@ -86,6 +119,12 @@ class Surat_model extends CI_Model
         $this->tanggal_mulai = $post["tanggal_mulai"];
         $this->tanggal_selesai = $post["tanggal_selesai"];
         $this->db->insert($this->_table, $this);
+    }
+
+    public function print()
+    {
+       $post = $this->input->post();
+        $this->kode_dosen = $$kode_dosen;
     }
 
     public function update()

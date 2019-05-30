@@ -10,6 +10,7 @@ class surat extends CI_Controller
         $this->load->model("surat_model");
         $this->load->model("dosen_model");
         $this->load->model("pejabat_model");
+        $this->load->library('pdf');
         $this->load->library('form_validation');
     }
 
@@ -58,6 +59,22 @@ class surat extends CI_Controller
         
         $this->load->view("admin/surat/edit_form", $data);
     }
+
+    public function print($kode_dosen = null)
+    {
+        if (!isset($kode_dosen)) redirect('admin/surat');
+       
+        $surat = $this->surat_model;
+        $validation = $this->form_validation;
+        $validation->set_rules($surat->rules());
+
+        $data["cetak_jadwal"] = $surat->cetakJadwal($kode_dosen);
+        $data["surat"] = $surat->cetakSurat($kode_dosen);
+        if (!$data["surat"]) show_404();
+        
+        $this->load->view("admin/surat/cetak_surat", $data);
+    }
+
 
     public function delete($id=null)
     {

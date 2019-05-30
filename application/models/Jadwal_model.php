@@ -11,6 +11,7 @@ class Jadwal_model extends CI_Model
     public $jam_mulai;
     public $jam_selesai;
     public $periode;
+    public $kelas;
 
     public function rules()
     {
@@ -38,6 +39,10 @@ class Jadwal_model extends CI_Model
             
             ['field' => 'jam_selesai',
             'label' => 'Jam Selesai',
+            'rules' => 'required'],
+
+            ['field' => 'kelas',
+            'label' => 'Kelas',
             'rules' => 'required'],
 
              ['field' => 'periode',
@@ -73,6 +78,7 @@ class Jadwal_model extends CI_Model
         $this->jam_mulai = $post["jam_mulai"];
         $this->jam_selesai = $post["jam_selesai"];
         $this->periode = $post["periode"];
+        $this->kelas = $post["kelas"];
         $this->db->insert($this->_table, $this);
     }
 
@@ -87,6 +93,7 @@ class Jadwal_model extends CI_Model
         $this->jam_mulai = $post["jam_mulai"];
         $this->jam_selesai = $post["jam_selesai"];
         $this->periode = $post["periode"];
+        $this->kelas = $post["kelas"];
 	
         $this->db->update($this->_table, $this, array('id_jadwal' => $post['id_jadwal']));
     }
