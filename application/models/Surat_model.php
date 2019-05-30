@@ -88,7 +88,16 @@ class Surat_model extends CI_Model
         
             return $query = $this->db->get()->row();
     }
-
+    public function cetakS($kode_dosen)
+    {
+        $this->db->select('surat.*,dosen.nama as nama_dosen, pejabat.nip as nip_pejabat, pejabat.nama as nama_pejabat, pejabat.jabatan ');
+            $this->db->from('surat');
+            $this->db->join('dosen', 'dosen.kode_dosen = surat.kode_dosen');
+            $this->db->join('pejabat', 'pejabat.kode_pejabat = surat.kode_pejabat');
+            $this->db->where('surat.kode_dosen='.$kode_dosen);
+        
+            return $query = $this->db->get()->row_array();
+    }
 
 
     public  function cetakJadwal($kode_dosen)
@@ -123,8 +132,9 @@ class Surat_model extends CI_Model
 
     public function print()
     {
-       $post = $this->input->post();
-        $this->kode_dosen = $$kode_dosen;
+       $post = $this->input->post('kode_dosen');
+       echo $post;die();
+        $this->kode_dosen = $post;
     }
 
     public function update()

@@ -122,7 +122,7 @@
 					Cetak Surat Cepat </div>
 					<div class="card-body">
 
-						<form action="<?php base_url(" admin/overview/print") ?>" method="post" enctype="multipart/form-data" >
+						<form action="http://127.1.1.1/sisurat/index.php/cetak" method="post" enctype="multipart/form-data" >
 							<div class="form-group">
 								
 							<select class="form-control  <?php echo form_error('kode_dosen') ? 'is-invalid':'' ?>"  name="kode_dosen" >
@@ -138,7 +138,7 @@
 							</div>
 						
 							</div>
-							<div class="text-center">
+							<div class="text-center">	
 								<input class="btn btn-success" type="submit" name="btn" value="Cetak" />			
 							</div>
 							
