@@ -1,8 +1,14 @@
 <html>
 <head>
-	<title>Login - CodeIgniter</title>
+	<title>Login - SISURAT</title>
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
+
+        body {
+            background-image: url("../../assets/image/saintek.jpg");
+            background-repeat: no-repeat;
+            background-size:  100% 150%;
+        }
         .form-signin
         {
             max-width: 330px;
@@ -80,14 +86,15 @@
         }
     </style>
 </head>
-<body>
+<body >
 <div class="container" style="margin-top: 50px">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">Masuk Administrator</h1>
             <?php if(isset($error)) { echo $error; }; ?>
             <div class="account-wall">
-                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                <h1 class="text-center login-title">Login Administrator SISURAT</h1>
+            
+                <img class="profile-img" src="../../assets/image/logo_uin.png"
                     alt="">    
                 <form class="form-signin" method="POST" action="<?php echo base_url() ?>index.php/admin/login">
                 <div class="form-group">
@@ -102,14 +109,8 @@
                 <button class="btn btn-lg btn-primary btn-block" name="btn-login" id="btn-login" type="submit">
                     Masuk</button>
 
-                <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me">
-                    Ingatkan Saya
-                </label>
-                <a href="#" class="pull-right need-help">Butuh bantuan? </a><span class="clearfix"></span>
                 </form>
             </div>
-            <a href="#" class="text-center new-account">Buat Akun </a>
             <div id="error" style="margin-top: 10px"></div>
         </div>
     </div>

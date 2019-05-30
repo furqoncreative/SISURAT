@@ -15,7 +15,7 @@
                 <i class="fas fa-user-circle fa-fw"></i> Hai, <?php echo $this->session->userdata("user_nama") ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">List Admin</a>
+                <a class="dropdown-item" href="<?php echo site_url('admin/admin') ?>">List Admin</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">Logout</a>
             </div>

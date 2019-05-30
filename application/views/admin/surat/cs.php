@@ -105,7 +105,7 @@ $pdf = new FPDF('p','mm','A4');
         $pdf->setX(33);
         $pdf->Cell(7,5,$a++,1,0,'C');
         $pdf->SetFont('Times','',10);
-        $pdf->Cell(55,5,substr($row->nama_mk,0,30.).'...',1,0,'C');
+        $pdf->Cell(55,5,substr($row->nama_mk,0,30.),1,0,'C');
         $pdf->Cell(13,5,$row->jumlah_sks,1,0,'C');
         $pdf->Cell(30,5,substr($row->nama_jurusan,0,3)."/".$row->semester."/".$row->kelas,1,0,'C');
         $pdf->Cell(20,5,$row->hari,1,0,'C');
