@@ -7,8 +7,9 @@ Cara penggunaan :
 4. import database dari folder db didalam folder utama
 5. jalankan di http://127.1.1.1/sisurat/
 
+untuk mencoba login gunakan akun berikut : 
 
-untuk mencoba login gunakan akun dibawah :
 username : furqon
+
 password : qwerty
 
